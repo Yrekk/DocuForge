@@ -244,16 +244,11 @@ C'est adapté pour une première version orientée :
 - [x] Téléchargement du document généré
 - [x] Tests unitaires
 
-### Évolutions V1 possibles
+### V1
 
-- [ ] Améliorer le nom du fichier généré
-- [ ] Ajouter un champ de nommage du document
-- [ ] Ajouter des exemples publics de templates
-- [ ] Améliorer la présentation Streamlit
-- [ ] Gérer des champs optionnels
-- [ ] Ajouter des types de champs spécifiques : checkbox, zone longue, liste
-- [ ] Gérer les templates avec boucles Jinja2
-- [ ] Ajouter un export Markdown dédié
+- [x] Refacto de la logique de main vers un controller dédié
+- [x] Ajouts d'un fichier config.json pour indiquer le path de documents en local
+- [x] Ajouts d'un controller pour générer des prompts uniquement depuis le fichier local
 
 ### V2 envisagée
 
