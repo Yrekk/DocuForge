@@ -48,6 +48,25 @@ signature
 
 Puis génère un formulaire permettant de renseigner ces valeurs.
 
+Les variables Jinja2 doivent être écrites en snake_case :
+- lettres minuscules
+- chiffres autorisés sauf en premier caractère
+- underscores pour séparer les mots
+- pas d'espaces
+- pas d'apostrophes
+- pas de tirets
+
+Exemples :
+    Correct :
+    {{ nom_entreprise }}
+    {{ public_cible }}
+    {{ objectif_redaction }}
+
+    Incorrect :
+    {{ nom entreprise }}
+    {{ public-cible }}
+    {{ l'objectif }}
+
 ---
 
 ## Fonctionnalités actuelles
