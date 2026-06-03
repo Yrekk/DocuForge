@@ -189,7 +189,7 @@ python -m pytest
 Résultat attendu :
 
 ```txt
-14 passed
+23 passed
 ```
 
 ---
