@@ -1,3 +1,4 @@
 {
-    "prompt_template_path": "templates_examples/prompt_simple.txt"
+    "prompt_template_path": "templates_examples/prompt_simple.txt",
+    "advanced_prompt_template_path": "templates_examples/prompt.txt"
 }

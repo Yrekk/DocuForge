@@ -34,6 +34,11 @@ def load_config(config_path: str | Path = DEFAULT_CONFIG_PATH) -> dict:
     
 def get_prompt_template_path() -> Path:
     config = load_config()
+    prompt_template_path = config.get(
+        "advanced_prompt_template_path",
+        config.get("prompt_template_path"),
+    )
     if "prompt_template_path" not in config:
         raise KeyError("La clé 'prompt_template_path' est absente du fichier de configuration.")
-    return Path(config["prompt_template_path"])
+
+    return Path(prompt_template_path)

@@ -2,21 +2,16 @@ import streamlit as st
 from jinja2.exceptions import TemplateError, TemplateSyntaxError
 
 from app.services.config_loader import get_prompt_template_path
-from app.services.form_validator import get_empty_required_fields
 from app.services.local_template_loader import load_local_template
-from app.services.template_renderer import render_template
-from app.services.variable_extractor import extract_template_variables
-from app.ui.clipboard_button import display_copy_button
-from app.ui.form_builder import build_dynamic_form
+from app.workflows.template_generation_workflow import run_template_generation_workflow
 
 
 def run_prompt_generator_mode(key_prefix: str) -> None:
     """
     Run the local prompt generation workflow.
 
-    This mode loads a prompt template from the application configuration,
-    generates a dynamic form from its Jinja2 variables, renders the final
-    prompt, and allows the user to copy the result.
+    This mode loads a prompt template from configuration, generates a dynamic
+    form from its variables, renders the final prompt, and allows copy only.
     """
     st.subheader("Génération de prompt")
 
@@ -28,7 +23,6 @@ def run_prompt_generator_mode(key_prefix: str) -> None:
     try:
         prompt_template_path = get_prompt_template_path()
         template_content = load_local_template(prompt_template_path)
-        variables = extract_template_variables(template_content)
 
         with st.expander("Voir le template utilisé"):
             st.text_area(
@@ -38,44 +32,17 @@ def run_prompt_generator_mode(key_prefix: str) -> None:
                 disabled=True,
             )
 
-        st.write("Variables détectées :")
-
-        if variables:
-            st.code(", ".join(variables))
-
-            form_values = build_dynamic_form(
-                variables,
-                key_prefix=key_prefix,
-            )
-
-            if st.button("Générer le prompt", key="generate_prompt"):
-                empty_fields = get_empty_required_fields(form_values)
-
-                if empty_fields:
-                    st.warning(
-                        "Certains champs obligatoires sont vides : "
-                        + ", ".join(empty_fields)
-                    )
-                else:
-                    rendered_prompt = render_template(
-                        template_content,
-                        form_values,
-                    )
-
-                    st.subheader("Prompt généré")
-
-                    st.text_area(
-                        "Résultat",
-                        value=rendered_prompt,
-                        height=500,
-                    )
-
-                    display_copy_button(
-                        rendered_prompt,
-                        button_label="Copier le prompt",
-                    )
-        else:
-            st.info("Aucune variable Jinja2 détectée dans le template de prompt.")
+        run_template_generation_workflow(
+            template_content=template_content,
+            key_prefix=key_prefix,
+            generate_button_label="Générer le prompt",
+            generate_button_key="generate_prompt",
+            result_title="Prompt généré",
+            result_area_label="Résultat",
+            copy_button_label="Copier le prompt",
+            result_height=500,
+            enable_download=False,
+        )
 
     except FileNotFoundError as error:
         st.error(str(error))
