@@ -6,6 +6,7 @@ from app.services.template_reader import read_template_file
 from app.services.variable_extractor import extract_template_variables
 from app.services.template_renderer import render_template
 from app.services.form_validator import get_empty_required_fields
+from app.services.filename_sanitizer import sanitize_filename
 
 from app.ui.form_builder import build_dynamic_form
 from app.ui.clipboard_button import display_copy_button
@@ -35,6 +36,11 @@ def main() -> None:
         try:
             content = read_template_file(uploaded_file)
             variables = extract_template_variables(content)
+            output_filename = st.text_input(
+                label="Nom du fichier généré",
+                value="document_genere",
+                key="output_filename",
+            )
 
             st.success("Template chargé avec succès.")
 
@@ -61,6 +67,7 @@ def main() -> None:
                         )
                     else:
                         rendered_document = render_template(content, form_values)
+                        safe_filename = sanitize_filename(output_filename)
 
                         st.subheader("Document généré")
 
@@ -71,11 +78,11 @@ def main() -> None:
                         )
 
                         display_copy_button(rendered_document)
-
+                        
                         st.download_button(
                             label="Télécharger le document",
                             data=rendered_document,
-                            file_name="document_genere.txt",
+                            file_name=f"{safe_filename}.txt",
                             mime="text/plain",
                         )
             else:

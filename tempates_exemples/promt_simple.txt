@@ -1,0 +1,8 @@
+Bonjour {{ nom }},
+
+Je candidate au poste de {{ poste }} chez {{ entreprise }}.
+
+{{ motivation }}
+
+Cordialement,
+{{ signature }}
