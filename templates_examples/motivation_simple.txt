@@ -6,3 +6,4 @@ Je candidate au poste de {{ poste }} chez {{ entreprise }}.
 
 Cordialement,
 {{ signature }}
+

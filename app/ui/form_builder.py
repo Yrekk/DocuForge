@@ -91,7 +91,7 @@ def should_use_text_area(variable_name: str) -> bool:
     return any(keyword in normalized_name for keyword in LONG_TEXT_KEYWORDS)
 
 
-def build_dynamic_form(variables: list[str]) -> dict[str, str]:
+def build_dynamic_form(variables: list[str], key_prefix: str = "field") -> dict[str, str]:
     """
     Build a dynamic Streamlit form from template variables.
 
@@ -117,7 +117,7 @@ def build_dynamic_form(variables: list[str]) -> dict[str, str]:
         else:
             form_values[variable] = st.text_input(
                 label=label,
-                key=f"field_{variable}",
+                key=f"{key_prefix}_{variable}",
             )
 
     return form_values
