@@ -42,3 +42,15 @@ def get_prompt_template_path() -> Path:
         raise KeyError("La clé 'prompt_template_path' est absente du fichier de configuration.")
 
     return Path(prompt_template_path)
+
+def get_application_template_path() -> Path:
+    config = load_config()
+
+    template_path = config.get("application_template_path")
+
+    if template_path is None:
+        raise KeyError(
+            "La clé 'application_template_path' est absente du fichier de configuration."
+        )
+
+    return Path(template_path)

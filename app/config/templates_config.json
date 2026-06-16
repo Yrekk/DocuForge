@@ -1,4 +1,6 @@
 {
     "prompt_template_path": "templates_examples/prompt_simple.txt",
     "advanced_prompt_template_path": "templates_examples/prompt.txt"
+    "advanced_prompt_template_path": "templates_examples/prompt.txt",
+    "application_template_path": "templates_examples/application_package_simple.txt"
 }

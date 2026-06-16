@@ -3,6 +3,7 @@ import streamlit as st
 from app.constants import APP_MODES, AppMode, FormKeyPrefix
 from app.controllers.offline_template_controller import run_offline_template_mode
 from app.controllers.prompt_generator_controller import run_prompt_generator_mode
+from app.controllers.application_package_controller import run_application_package_mode
 
 
 def main() -> None:
@@ -30,7 +31,10 @@ def main() -> None:
         run_offline_template_mode(key_prefix=FormKeyPrefix.OFFLINE)
 
     elif selected_mode_value == AppMode.PROMPT:
-      run_prompt_generator_mode(key_prefix=FormKeyPrefix.PROMPT)
+        run_prompt_generator_mode(key_prefix=FormKeyPrefix.PROMPT)
+
+    elif selected_mode_value == AppMode.APPLICATION:
+        run_application_package_mode(key_prefix=FormKeyPrefix.APPLICATION,)
 
 
 if __name__ == "__main__":

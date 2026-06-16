@@ -5,11 +5,13 @@ class AppMode(StrEnum):
     NONE = "none"
     OFFLINE = "offline"
     PROMPT = "prompt"
+    APPLICATION = "application"
 
 
 class FormKeyPrefix(StrEnum):
     OFFLINE = "offline_field"
     PROMPT = "prompt_field"
+    APPLICATION = "application_field"
 
 
 APP_MODES = [
@@ -25,4 +27,8 @@ APP_MODES = [
         "label": "Génération de prompt",
         "value": AppMode.PROMPT,
     },
+    {
+    "label": "Assistant candidature offline",
+    "value": AppMode.APPLICATION,
+},
 ]
